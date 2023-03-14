@@ -49,10 +49,6 @@ import logging # To do the register loggin in logsfile
 
 ```
 
-
-
-
-
 Creamos la conexion con el servidor.
 + Para ello vamos a la maquina cliente y aseguramos que el nombre de equipo y de dominio este bien puesto. 
 
