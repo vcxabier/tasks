@@ -23,7 +23,34 @@
 
 ### *Desarrollo*.
 
-The first thing to create is a configuration file
+The first thing to create is a configuration file named `conf.ini`
+
+```python
+
+[backup]
+# set up the paths to be backed up
+set_source= /test1, /test2
+# set de destination of backups.
+set_destination= /Backups/
+
+[cuantity]
+# set the maximum cuantity of backup that be store
+max = 10
+```
+Then create the script with python. The first thing to do is to know which libraries to use. I use these libraries:
+
+```python
+
+import datetime # To set the time in the backup
+import os #solves compatibility problems between operative systems.
+import shutil # To do the new directory and create all 
+import configparser # To read the cofiguration file
+import logging # To do the register loggin in logsfile
+
+```
+
+
+
 
 
 Creamos la conexion con el servidor.
