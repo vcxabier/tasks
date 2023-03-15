@@ -94,7 +94,7 @@ backup_d = sorted([os.path.join(backup_location, d)
 ```
 After that create a condition that says that if `backup_d` is greater than `max_b` a function called `oldest` is defined and it assigns the oldest backup and then deletes it with `rmtree` and the whole process is recorded in the log file.
 
-To make the script run automatically in windows put the nex command in console `schtasks.exe 02:00 /every:5,10,15,20,25,30 archive cmd /c python /task1/backup_script.py`, to Open the program --> go to create task --> choose time interval, in this case daily al 2am--> choose execute a program--> choose the root path of the script
+To make the script run automatically in windows put the nex command in console `schtasks /create /tn "Daily Backup" /tr "python C:\task1\backup_script.py" /sc daily /st 02:00:00`, to Open the program --> go to create task --> choose time interval, in this case daily al 2am--> choose execute a program--> choose the root path of the script
 
 In linux execute the command `crontab -e` and add a new line with `0 2 * * * python3 /task1/backup_script.py` where it is indicated that it will be executed every day at 2am
 
