@@ -1,4 +1,5 @@
-*Name: Xabier vega castellà*
+
+*Name: Xabier Vega Castellà*
 
 ### *Requirements:*
 
@@ -54,7 +55,7 @@ For that we are going to define a fuction called `backup_dirs` with the section 
 backup_dirs = parser.get('backup', 'set_source').split(',')
 backup_location = parser.get('backup', 'set_destination')
 ```
-Also define one fuction called `max` this read the section inside the configuration file that say the maximum of backups that can be created.
+Also define one fuction called `max_b` this read the section inside the configuration file that say the maximum of backups that can be created, its 10 backup directory.
 
 ```python
 max_b = parser.getint('cuantity', 'max')
