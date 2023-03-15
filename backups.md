@@ -1,10 +1,3 @@
-<center>
-
-# 
-
-
-</center>
-
 *Name: Xabier vega castellà*
 
 ### *Requirements:*
@@ -21,6 +14,7 @@
 
 • The script should be runnable as a scheduled task.
 
+---
 ### *step by step*.
 
 The first thing to create is a configuration file named `conf.ini`
