@@ -1,6 +1,4 @@
-<p style="text-align: right;">
-*Name: Xabier Vega Castellà*
-</p>
+***Xabier Vega Castella***
 ### *Requirements:*
 
 • The script should be able to create a backup of all files and directories specified in a configuration file.
