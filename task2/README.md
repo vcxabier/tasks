@@ -33,16 +33,12 @@ INSERT INTO sales VALUES ('1','product3','2','20','2023-01-1');
 INSERT INTO sales VALUES ('2','product2','4','40','2022-02-24');
 INSERT INTO sales VALUES ('3','product1','1','10','2021-03-12');
 ```
-Then create the script with python. The first thing to do is to know which libraries to use. I use these libraries:
+Then create the user.
 
 ```python
-import shutil # To do the new directory and create all
-import configparser # To read the cofiguration file
-import os #solves compatibility problems between operative systems.
-import datetime # To set the time in the backup
-import logging # To do the register loggin in logsfile
+create user 'user1'@'%' identified by 'User1';
+grant all privileges on *.* to 'user1'@'%'with grant option;
 ```
-
 To read the configuration file I use the following two lines, where `parser` is equal to call the function and `parser.read` reads the file.
 
 ```python
