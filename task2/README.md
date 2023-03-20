@@ -99,12 +99,8 @@ In linux execute the command `crontab -e` and add a new line with `0 2 * * * pyt
 
 ### Checks
 
-In the next steps can we see how run the program in terminal and create the backups in the specificate path
-
 ![foto 1](./img/1.jpg)
 
 ![foto 2](./img/2.jpg)
-
-Also we see the logs file and how save all creations and deletions.
 
 ![foto 3](./img/3.jpg)
