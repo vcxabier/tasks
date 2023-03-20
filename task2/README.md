@@ -1,13 +1,13 @@
 ***Xabier Vega Castella***
 ### *Requirements:*
 
-* The script should connect to a MySQL database using the mysql-connector-python library.
-* The script should retrieve data from a specified table in the database.
-* The script should perform some data analysis on the retrieved data using the pandas library.
-* The data analysis should include at least one of the following: sorting, filtering, grouping, 
+• The script should connect to a MySQL database using the mysql-connector-python library.
+• The script should retrieve data from a specified table in the database.
+• The script should perform some data analysis on the retrieved data using the pandas library.
+• The data analysis should include at least one of the following: sorting, filtering, grouping, 
   aggregation, or visualization.
-* The script should log any errors encountered during the data retrieval or analysis.
-* The script should be runnable as a command-line application
+• The script should log any errors encountered during the data retrieval or analysis.
+• The script should be runnable as a command-line application
 
 ---
 ### *step by step*.
