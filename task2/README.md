@@ -2,11 +2,16 @@
 ### *Requirements:*
 
 • The script should connect to a MySQL database using the mysql-connector-python library.
+
 • The script should retrieve data from a specified table in the database.
+
 • The script should perform some data analysis on the retrieved data using the pandas library.
+
 • The data analysis should include at least one of the following: sorting, filtering, grouping, 
   aggregation, or visualization.
+  
 • The script should log any errors encountered during the data retrieval or analysis.
+
 • The script should be runnable as a command-line application
 
 ---
@@ -18,7 +23,7 @@ The first thing to create is a databases and some table.
 
 CREATE DATABASE IF NOT EXISTS `analysis` DEFAULT CHARACTER SET latin1;
 
-USE `analisys`;
+USE analysis;
 
 CREATE TABLE sales (
   id varchar(10) NOT NULL,
@@ -36,7 +41,7 @@ INSERT INTO sales VALUES ('3','product1','1','10','2021-03-12');
 Then create the user.
 
 ```python
-create user 'user1'@'%' identified by 'User1';
+create user 'user1'@'localhost' identified by 'User1';
 grant all privileges on *.* to 'user1'@'%'with grant option;
 ```
 To read the configuration file I use the following two lines, where `parser` is equal to call the function and `parser.read` reads the file.
