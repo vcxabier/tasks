@@ -53,6 +53,13 @@ import mysql.connector # To provide connectivity to the MySQL server for client 
 import pandas as pd # To bring the pandas data analysis library 
 import logging # To do the register loggin in logsfile
 ```
+For a logs create an order that registers all the deletions and creations indicating the path of the log file.
+
+```python
+logging.basicConfig(filename='mysql_analysis.log', level=logging.ERROR,
+                    format='%(asctime)s - %(levelname)s - %(message)s
+```
+
 Define a function to connect to the database where `connect_to_db` take 4 arguments to connect to the database.
 
 If the connection is successful,`conn` will be returned from the function using the return keyword and if an exception is raised during the connection attempt, the except block will execute. The exception object is assigned to the variable e.
@@ -84,22 +91,50 @@ def retrieve_data(conn, table):
         logging.error(f"Unable to retrieve data: {e}")
         return None
 ```
-Also define one fuction called `max_b` this read the section inside the configuration file that say the maximum of backups that can be created, its 10 backup directory.
 
 ```python
-max_b = parser.getint('cuantity', 'max')
+def perform_data_analysis(data):
+    try:
+        df = pd.DataFrame(data, columns=['id', 'product_name', 'quantity', 'price', 'date'])
+        sorted_data = None
+        if not df.empty:
+            sorted_data = df.sort_values(by=['id'], ascending=[True])
+        grouped_data = None
+        if not df.empty:
+            grouped_data = df.groupby(['product_name'])[['quantity', 'price']].sum()
+        return sorted_data, grouped_data
+    except Exception as e:
+        logging.error(f"Unable to perform data analysis: {e}")
+        return None, None
 ```
-The next step is create the directory with the current date and containing the copies of the directories you want.
-For this we have to define a function called `time` that will contain the format of the date.
-```python
-time = datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
-```
-Create a function called `backup_p` that joins the location indicated in the configuration file with the name `backup_` and add the current date.
-Then add `os.mkdir(backup_p)` to create the folder.
 
 ```python
-backup_p = os.path.join(backup_location, f'backup_{time}')
-os.mkdir(backup_p)
+def main():
+    host = input("Enter MySQL host name: ")
+    user = input("Enter MySQL user name: ")
+    password = input("Enter MySQL user password: ")
+    database = input("Enter MySQL database name: ")
+    table = input("Enter MySQL table name: ")
+
+    conn = connect_to_db(host, user, password, database)
+    if not conn:
+        return
+    data = retrieve_data(conn, table)
+    if not data:
+        return
+    sorted_data, grouped_data = perform_data_analysis(data)
+    if sorted_data is None or grouped_data is None:
+        return
+    print("Sorted Data:")
+    print(sorted_data)
+    print("\nGrouped Data:")
+    print(grouped_data)
+    conn.close()
+```
+
+```python
+if __name__ == "__main__":
+    main()
 ```
 For a logs create an order that registers all the deletions and creations indicating the path of the log file.
 ```python
