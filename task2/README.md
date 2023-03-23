@@ -90,6 +90,8 @@ def retrieve_data(conn, table):
         logging.error(f"Unable to retrieve data: {e}")
         return None
 ```
+Data analysis function:
+The `perform_data_analysis()` function is defined to perform data analysis on data retrieved using the `panda` library. The data returned by `retrieve_data()`. It creates a pandas DataFrame from the data and performs two operations: it sorts the data by the `id` column in ascending order, and it groups the data by the `product_name` column and sums the quantity and price columns. It returns the sorted and grouped data. If any error occurs during the data analysis, it logs an error message and returns None.
 
 ```python
 def perform_data_analysis(data):
@@ -106,10 +108,11 @@ def perform_data_analysis(data):
         logging.error(f"Unable to perform data analysis: {e}")
         return None, None
 ```
+The `main()` function executes the script as a command line application. It requests the database connection details, these are host, user, password, database and table. It then calls the `connect_to_db()` function to connect, the `retrieve_data()` function to retrieve the data from the table and the `perform_data_analysis()` function to perform the analysis of the retrieved data. If any errors occur during these operations, an error message is logged. Otherwise, it prints the sorted and grouped data.
 
 ```python
 def main():
-    host = input("Enter MySQL host name: ")
+    host = input("Enter MySQL host name : ")
     user = input("Enter MySQL user name: ")
     password = input("Enter MySQL user password: ")
     database = input("Enter MySQL database name: ")
@@ -130,38 +133,12 @@ def main():
     print(grouped_data)
     conn.close()
 ```
-
+Calls the function when the script is executed from the command line.
 ```python
 if __name__ == "__main__":
     main()
 ```
-For a logs create an order that registers all the deletions and creations indicating the path of the log file.
-```python
-logging.basicConfig(filename='backup.log', level=logging.INFO)
-```
-The next thing to do is to create a condition for the creation of the copies.
-Call the condition `directory` and tell it that if the directory exists it will create a copy with the name previously specified in `backup_p`, also register the creation into the log file, and if the copy fails, log it with an error and if the directory is not found, also log it.
-```python
-            logging.info(f"The backup of {directory} has been succefully created")
-        except Exception as e:
-           logging.error(f"{directory} has an error with the backup: {e}")
-    else:
-        logging.error(f'{directory} does not exist')
-```
 
-Finally the oldest backups should be deleted when a new one is registered, for this, we are going to order them from the oldest copy to the most recent one in ascending order, this function is called `backup_d`.
-```python
-backup_d = sorted([os.path.join(backup_location, d)
-                   for d in os.listdir(backup_location) 
-                   if os.path.isdir(os.path.join(backup_location, d))])
-```
-After that create a condition that says that if `backup_d` is greater than `max_b` a function called `oldest` is defined and it assigns the oldest backup and then deletes it with `rmtree` and the whole process is recorded in the log file.
-
-To make the script run automatically in windows put the nex command in console `schtasks /create /tn "Daily Backup" /tr "python C:\task1\backup_script.py" /sc daily /st 02:00:00`. The above command makes a scheduled task on the system to run the command `python C:\backup_script.py` every day at 2am
-
-In linux execute the command `crontab -e` and add a new line with `0 2 * * * python3 backup_script.py` where it is indicated that it will be executed every day at 2am
-
----
 
 ### Checks
 
