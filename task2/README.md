@@ -60,10 +60,8 @@ logging.basicConfig(filename='mysql_analysis.log', level=logging.ERROR,
                     format='%(asctime)s - %(levelname)s - %(message)s
 ```
 
-Define a function to connect to the database where `connect_to_db` take 4 arguments to connect to the database.
-
-If the connection is successful,`conn` will be returned from the function using the return keyword and if an exception is raised during the connection attempt, the except block will execute. The exception object is assigned to the variable e.
-The logging.error() function is called with a string that describes the error. This function logs the error to a log named mysql_analysis.log.
+Defines a function to connect to the database where `connect_to_db` takes 4 arguments to connect to the database.If the connection succeeds, the `conn` function will be returned using the `return` keyword and if an exception occurs during the connection attempt, the `except` block will be executed. This is assigned to the variable .
+The `logging.error()` function is called with a string describing the error. This function logs the error in a log called `mysql_analysis.log`.
 
 ```python
 def connect_to_db(host, user, password, database):
@@ -79,6 +77,7 @@ def connect_to_db(host, user, password, database):
         logging.error(f"Unable to connect to database: {e}")
         return None
 ```
+This code defines a function called `retrieve_data` that receives two arguments: a database connection and a table name. This function executes a SQL query to select all data in the specified table and returns the retrieved data. If an error occurs it sends a message indicating the error.
 
 ```python
 def retrieve_data(conn, table):
