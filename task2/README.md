@@ -141,9 +141,10 @@ if __name__ == "__main__":
 
 
 ### Checks
+If the script work show results like the next picture.
 
 ![foto 1](./img/1.jpg)
 
-![foto 2](./img/2.jpg)
+if the script doesn`t work, the error is saved in the previously configured log file.
 
-![foto 3](./img/3.jpg)
+![foto 2](./img/2.jpg)
