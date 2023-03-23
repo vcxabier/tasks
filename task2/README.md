@@ -17,7 +17,7 @@
 ---
 ### *step by step*.
 
-The first thing to create is a databases and some table.
+The first thing to create is a databases and some table into mysql program or other distribution.
 
 ```python
 
@@ -42,20 +42,47 @@ Then create the user.
 
 ```python
 create user 'user1'@'localhost' identified by 'User1';
-grant all privileges on *.* to 'user1'@'%'with grant option;
+grant all privileges on *.* to 'user1'@'localhost'with grant option;
 ```
-To read the configuration file I use the following two lines, where `parser` is equal to call the function and `parser.read` reads the file.
+then need install pip for `pip install`. After installation install `pip install mysql-connector-python` and `pip install pandas`. If there are any problems installing, it is advisable to create a virtual desktop to install pandas. Make sure pandas is in the same path as python.
+
+Once all this is done, we proceed to create the script. We import the necessary libraries.
 
 ```python
-parser=configparser.ConfigParser()
-parser.read("conf.conf")
+import mysql.connector # To provide connectivity to the MySQL server for client programs.
+import pandas as pd # To bring the pandas data analysis library 
+import logging # To do the register loggin in logsfile
+```
+Define a function to connect to the database where `connect_to_db` take 4 arguments to connect to the database.
+
+If the connection is successful,`conn` will be returned from the function using the return keyword and if an exception is raised during the connection attempt, the except block will execute. The exception object is assigned to the variable e.
+The logging.error() function is called with a string that describes the error. This function logs the error to a log named mysql_analysis.log.
+
+```python
+def connect_to_db(host, user, password, database):
+    try:
+        conn = mysql.connector.connect(
+            host=host,
+            user=user,
+            password=password,
+            database=database
+        )
+        return conn
+    except mysql.connector.Error as e:
+        logging.error(f"Unable to connect to database: {e}")
+        return None
 ```
 
-Now we have to tell it what it is going to read from the file.
-For that we are going to define a fuction called `backup_dirs` with the section where it find the paths inside the configuration file and separate it by commas to choose different directories using `split`, also define another function called `backup_location`, this fuction read the section where it will leave the copy of the file.
 ```python
-backup_dirs = parser.get('backup', 'set_source').split(',')
-backup_location = parser.get('backup', 'set_destination')
+def retrieve_data(conn, table):
+    try:
+        cursor = conn.cursor()
+        cursor.execute(f"SELECT * FROM {table}")
+        data = cursor.fetchall()
+        return data
+    except mysql.connector.Error as e:
+        logging.error(f"Unable to retrieve data: {e}")
+        return None
 ```
 Also define one fuction called `max_b` this read the section inside the configuration file that say the maximum of backups that can be created, its 10 backup directory.
 
