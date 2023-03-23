@@ -1,0 +1,1 @@
+2023-03-23 09:36:20,374 - ERROR - Unable to connect to database: 1045 (28000): Access denied for user 'User1'@'localhost' (using password: YES)
